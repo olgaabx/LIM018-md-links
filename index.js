@@ -3,21 +3,20 @@ const fs = require('fs'); // módulo de fs (para trabajar con fylesistem)
 const route = './README.md';
 const fakePath = './README2.md' // fake path para los test
 
-// // • Validamos si la ruta sí existe o no
-// const routeValidator = (router) => fs.existsSync(router);
+// • Validamos si la ruta sí existe o no
 const routeValidator = (router) => {
   const existingRouter = fs.existsSync(router);
   // console.log(existingRouter)
   if (existingRouter === true) {
-    console.log('Pues sí existe');
+    //console.log('Pues sí existe');
     return true;
   } else {
-    console.log("Pues no existe");
+    //console.log("Pues no existe");
     return false;
   }
-  // return fs.existsSync(router);
 };
 routeValidator(route);
+console.log(routeValidator(route));
 
 // • Saber si es absoluta
 // • Si no es absoluta, convertirla
@@ -27,15 +26,13 @@ const isItAbsolute = (router) => {
   } else {
     return path.resolve(router); // convierte la ruta en absoluta
   }
-  // const mightBeAbsolute = path.isAbsolute(route);
-  // return mightBeAbsolute;
 };
 isItAbsolute(route);
 console.log(isItAbsolute(route));
 
 // • Confirmando si el archivo tiene extesión .md
-const mdRoute = (route) => {
-  return path.extname(route); // arroja la extensión del archivo
+const mdRoute = (router) => {
+  return path.extname(router); // arroja la extensión del archivo
 };
 console.log(mdRoute(route));
 
@@ -52,4 +49,3 @@ module.exports = {
   fakePath,
   isItAbsolute,
 };
-// ________________________________________

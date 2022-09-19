@@ -1,4 +1,9 @@
-const { routeValidator, route, fakePath, isItAbsolute } = require("../index");
+const {
+  routeValidator,
+  route,
+  fakePath,
+  isItAbsolute
+} = require("../index");
 // const md = '.md'
 
 describe('routeValidator', () => {
@@ -16,9 +21,6 @@ describe('isItAbsolute', () => {
   it('should return the path if its absolute', () => {
     expect(isItAbsolute(route)).toBe('C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md');
   });
-  // it('should return an absolute path if its relative', () => {
-  //   expect(isItAbsolute(route)).toBe('../README.md');
-  // });
 });
 
 // describe("Con readMd me devuele el tipo de extensión del archivo", () => {
