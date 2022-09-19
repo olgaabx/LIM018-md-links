@@ -1,38 +1,36 @@
-// module.exports = () => {
-//   // ...
-// };
+const path = require('path'); // módulo path para trabajar con las rutas
+const fs = require('fs'); // módulo de fs (para trabajar con fylesistem)
+const route = './README.md';
+const fakePath = './README2.md' // fake path para los test
 
-const path = require("path"); // módulo path para trabajar con las rutas
-const fs = require("fs"); // módulo de fs (para trabajar con fylesistem)
-// console.log("Mmm gracioso, pero no gracioso de risa, gracioso de raro");
-const route = "./README.md";
-
-// const mdLinks = (route) => {
-// }
-
-// • Validamos si la ruta sí existe o no
-const routeValidator = (route) => {
-  const existingRoute = fs.existsSync(route);
-
-  if (existingRoute === true) {
-    console.log("Pues sí existe");
+// // • Validamos si la ruta sí existe o no
+// const routeValidator = (router) => fs.existsSync(router);
+const routeValidator = (router) => {
+  const existingRouter = fs.existsSync(router);
+  // console.log(existingRouter)
+  if (existingRouter === true) {
+    console.log('Pues sí existe');
+    return true;
   } else {
     console.log("Pues no existe");
+    return false;
   }
+  // return fs.existsSync(router);
 };
 routeValidator(route);
 
 // • Saber si es absoluta
 // • Si no es absoluta, convertirla
-const isItAbsolute = (route) => {
-  if (path.isAbsolute(route)) {
+const isItAbsolute = (router) => {
+  if (path.isAbsolute(router)) {
     return true;
   } else {
-    return path.resolve(route); // convierte la ruta en absoluta
+    return path.resolve(router); // convierte la ruta en absoluta
   }
   // const mightBeAbsolute = path.isAbsolute(route);
   // return mightBeAbsolute;
 };
+isItAbsolute(route);
 console.log(isItAbsolute(route));
 
 // • Confirmando si el archivo tiene extesión .md
@@ -47,3 +45,11 @@ console.log(mdRoute(route));
 // } else {
 //   return "Error";
 // }
+
+module.exports = {
+  routeValidator,
+  route,
+  fakePath,
+  isItAbsolute,
+};
+// ________________________________________
