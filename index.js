@@ -1,7 +1,7 @@
 const path = require('path'); // módulo path para trabajar con las rutas
 const fs = require('fs'); // módulo de fs (para trabajar con fylesistem)
 const route = './README.md';
-const fakePath = './README2.md' // fake path para los test
+// const fakePath = './README2.md' // fake path para los test
 
 // • Validamos si la ruta sí existe o no
 const routeValidator = (router) => {
@@ -46,6 +46,6 @@ console.log(mdRoute(route));
 module.exports = {
   routeValidator,
   route,
-  fakePath,
+  path,
   isItAbsolute,
 };

@@ -1,31 +1,31 @@
 const {
   routeValidator,
-  route,
-  fakePath,
+  path,
+  // route,
+  // fakePath,
   isItAbsolute
 } = require("../index");
 // const md = '.md'
 
 describe('routeValidator', () => {
   it('should return true if the path exists', () => {
-    // const truePath = "/c/Users/Usuario/Git/Laboratoria/LIM018-md-links";
-    expect(routeValidator(route)).toBe(true);
+    const truePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README.md";
+    expect(routeValidator(truePath)).toBe(true);
   });
+
   it('should return false if the path doesnt exists', () => {
-    // const fakePath = "../README2.md";
+    const fakePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README2.md";
     expect(routeValidator(fakePath)).toBe(false);
   });
 });
 
 describe('isItAbsolute', () => {
+  const relativePath = "./README.md";
+  it("should return false if the path isnt absolute", () => {
+    expect(path.isAbsolute(relativePath)).toBe(false);
+  });
+
   it('should return the path if its absolute', () => {
-    expect(isItAbsolute(route)).toBe('C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md');
+    expect(isItAbsolute(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md");
   });
 });
-
-// describe("Con readMd me devuele el tipo de extensión del archivo", () => {
-//   it("me devuelve el tipo de extensión que tiene el archivo", () => [
-//     expect(readMd(mdPruebaRelative)).toBe(".md"),
-//   ]);
-// });
-
