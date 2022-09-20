@@ -1,16 +1,15 @@
 const {
   routeValidator,
   isItAbsolute,
-  path,
+  resolvePath,
   fileExtname,
   readFiles,
 } = require("../index");
-
+const truePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README.md";
 const relativePath = "./README.md";
 
 describe("routeValidator", () => {
   it("should return true if the path exists", () => {
-    const truePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README.md";
     expect(routeValidator(truePath)).toBe(true);
   });
 
@@ -20,13 +19,18 @@ describe("routeValidator", () => {
   });
 });
 
-describe("isItAbsolute", () => {
-  it("should return false if the path isnt absolute", () => {
-    expect(path.isAbsolute(relativePath)).toBe(false); // DUDAS
+describe("isItAbsolute, ", () => {
+  it("should return true if the path is absolute", () => {
+    expect(isItAbsolute(truePath)).toBe(true);
   });
+  it("should return false if the path isnt absolute", () => {
+    expect(isItAbsolute(relativePath)).toBe(false);
+  });
+});
 
+describe("resolvePath", () => {
   it("should return the path if its absolute", () => {
-    expect(isItAbsolute(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md");
+    expect(resolvePath(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md");
   });
 });
 
