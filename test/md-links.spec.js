@@ -1,11 +1,11 @@
 const {
   routeValidator,
+  isItAbsolute,
   path,
-  // route,
-  // fakePath,
-  isItAbsolute
+  fileExtname,
 } = require("../index");
-// const md = '.md'
+
+const relativePath = "./README.md";
 
 describe('routeValidator', () => {
   it('should return true if the path exists', () => {
@@ -20,7 +20,6 @@ describe('routeValidator', () => {
 });
 
 describe('isItAbsolute', () => {
-  const relativePath = "./README.md";
   it("should return false if the path isnt absolute", () => {
     expect(path.isAbsolute(relativePath)).toBe(false);
   });
@@ -28,4 +27,11 @@ describe('isItAbsolute', () => {
   it('should return the path if its absolute', () => {
     expect(isItAbsolute(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md");
   });
+});
+
+describe("fileExtname", () => {
+  it("should return true if the extension name is md", () => {
+    const md = ".md";
+    expect(fileExtname(relativePath)).toBe(md);
+  })
 });
