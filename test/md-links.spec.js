@@ -21,7 +21,7 @@ describe('routeValidator', () => {
 
 describe('isItAbsolute', () => {
   it("should return false if the path isnt absolute", () => {
-    expect(path.isAbsolute(relativePath)).toBe(false);
+    expect(path.isAbsolute(relativePath)).toBe(false); // DUDAS
   });
 
   it('should return the path if its absolute', () => {

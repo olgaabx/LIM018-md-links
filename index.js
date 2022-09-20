@@ -32,14 +32,9 @@ console.log(isItAbsolute(route));
 
 // • Confirmando si el archivo tiene extesión .md
 const fileExtname = (router) => {
-  // const extname = path.extname(router);
-  // if (extname === '.md') {
-  //   // console.log(extname);
-  //   return true // extname
-  // } else {
-  //   return false
-  // }
-  return path.extname(router); // devuelve la extensión del archivo
+  const extname = path.extname(router);
+  return extname === ".md" ? extname : false; // devuelve la extensión del archivo si es md
+  // return path.extname(router); // arroja la extensión del archivo
 };
 fileExtname(route);
 console.log(fileExtname(route));
@@ -57,4 +52,5 @@ module.exports = {
   isItAbsolute,
   path,
   fileExtname,
+  route,
 };
