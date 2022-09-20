@@ -3,6 +3,7 @@ const {
   isItAbsolute,
   path,
   fileExtname,
+  readFiles,
 } = require("../index");
 
 const relativePath = "./README.md";
@@ -33,5 +34,13 @@ describe("fileExtname", () => {
   it("should return true if the extension name is md", () => {
     const md = ".md";
     expect(fileExtname(relativePath)).toBe(md);
+  })
+});
+
+describe("readFiles", () => {
+  it("should read the content of the file", () => {
+    const testPath = "./pruebasmd/readme1.md";
+    const testFile = "### Sugerencias de implementación";
+    expect(readFiles(testPath)).toContain(testFile);
   })
 });

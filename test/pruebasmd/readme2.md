@@ -1,0 +1,1 @@
+Sugerencias de implementación

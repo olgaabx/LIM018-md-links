@@ -15,7 +15,7 @@ const routeValidator = (router) => {
     return false;
   }
 };
-routeValidator(route);
+// routeValidator(route);
 console.log(routeValidator(route));
 
 // • Saber si es absoluta
@@ -27,7 +27,7 @@ const isItAbsolute = (router) => {
     return path.resolve(router); // convierte la ruta en absoluta
   }
 };
-isItAbsolute(route);
+// isItAbsolute(route);
 console.log(isItAbsolute(route));
 
 // • Confirmando si el archivo tiene extesión .md
@@ -36,15 +36,19 @@ const fileExtname = (router) => {
   return extname === ".md" ? extname : false; // devuelve la extensión del archivo si es md
   // return path.extname(router); // arroja la extensión del archivo
 };
-fileExtname(route);
+// fileExtname(route);
 console.log(fileExtname(route));
 
 // • Leer el archivo
-// if (path.extname(route) === ".md") {
-//   return fs.readFileSync(route, "utf-8");
-// } else {
-//   return "Error";
-// }
+const readFiles = (router) => {
+  if (path.extname(router) === ".md") {
+    return fs.readFileSync(route, "utf-8"); // método que lee el archivo y devuelve su contenido
+  } else {
+    return "no pasa nada";
+  }
+}
+// readFiles(route);
+// console.log(readFiles(route));
 
 module.exports = {
   routeValidator,
@@ -52,5 +56,5 @@ module.exports = {
   isItAbsolute,
   path,
   fileExtname,
-  route,
+  readFiles,
 };
