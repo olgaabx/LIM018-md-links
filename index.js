@@ -50,9 +50,22 @@ const readFiles = (router) => {
 // readFiles(route);
 // console.log(readFiles(route));
 
+// • Obtener los links
+const getLinks = (router) => {
+  const regExLinks = /\[(.*?)\]\(.*?\)/gm; // expresión regular para los links
+  const readingFiles = readFiles(router); // función que ya lee los archivos
+  const linksFinder = readingFiles.match(regExLinks); // método para encontrar los match con la RegEx
+
+  // if (linksFinder !== "") {
+  //   return linksFinder.map((item) => {
+  //   });
+  //};
+  // return linksFinder;
+}
+console.log(getLinks(route));
+
 module.exports = {
   routeValidator,
-  // route,
   isItAbsolute,
   path,
   fileExtname,
