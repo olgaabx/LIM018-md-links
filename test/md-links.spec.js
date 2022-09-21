@@ -4,33 +4,35 @@ const {
   resolvePath,
   fileExtname,
   readFiles,
+  getLinks,
 } = require("../index");
+
 const truePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README.md";
-const relativePath = "./README.md";
+const relativePath = "./pruebasmd/readme2.md";
 
 describe("routeValidator", () => {
   it("should return true if the path exists", () => {
-    expect(routeValidator(truePath)).toBe(true);
+    expect(routeValidator(truePath)).toBeTruthy();
   });
 
   it("should return false if the path doesnt exists", () => {
     const fakePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README2.md";
-    expect(routeValidator(fakePath)).toBe(false);
+    expect(routeValidator(fakePath)).toBeFalsy();
   });
 });
 
 describe("isItAbsolute, ", () => {
   it("should return true if the path is absolute", () => {
-    expect(isItAbsolute(truePath)).toBe(true);
+    expect(isItAbsolute(truePath)).toBeTruthy();
   });
   it("should return false if the path isnt absolute", () => {
-    expect(isItAbsolute(relativePath)).toBe(false);
+    expect(isItAbsolute(relativePath)).toBeFalsy();
   });
 });
 
 describe("resolvePath", () => {
   it("should return the path if its absolute", () => {
-    expect(resolvePath(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\README.md");
+    expect(resolvePath(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\pruebasmd\\readme2.md");
   });
 });
 
@@ -39,12 +41,39 @@ describe("fileExtname", () => {
     const md = ".md";
     expect(fileExtname(relativePath)).toBe(md);
   })
+  it("should return false if the extension name isnt md", () => {
+    const fakeFile = "../src/probando.js";
+    expect(fileExtname(fakeFile)).toBeFalsy();
+  })
 });
 
 describe("readFiles", () => {
   it("should read the content of the file", () => {
-    const testPath = "./pruebasmd/readme1.md";
+    // const testPath = "./pruebasmd/readme2.md";
     const testFile = "* [Array.prototype.sort() - MDN]";
-    expect(readFiles(testPath)).toContain(testFile);
+    expect(readFiles(relativePath)).toContain(testFile);
+  })
+});
+
+describe("getLinks", () => {
+  it("should return an array of objects", () => {
+    const arrayObjects = [
+      {
+        file: "./test/pruebasmd/readme2.md",
+        href: "https://curriculum.laboratoria.la/es/topics/javascript/04-arrays",
+        text: "Arreglos",
+      },
+      {
+        file: "./test/pruebasmd/readme2.md",
+        href: "https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/",
+        text: "Array - MDN",
+      },
+      {
+        file: "./test/pruebasmd/readme2.md",
+        href: "https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+        text: "Array.prototype.sort() - MDN",
+      },
+    ];
+    expect(getLinks(relativePath)).toStrictEqual(arrayObjects);
   })
 });

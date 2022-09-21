@@ -44,11 +44,11 @@ const readFiles = (router) => {
   if (path.extname(router) === ".md") {
     return fs.readFileSync(route, "utf-8"); // método que lee el archivo y devuelve su contenido
   } else {
-    return "no pasa nada";
+    return false;
   }
 }
 // readFiles(route);
-// console.log(readFiles(route));
+//console.log(readFiles(route));
 
 // • Obtener los links
 const getLinks = (router) => {
@@ -57,12 +57,11 @@ const getLinks = (router) => {
   const linksFinder = readingFiles.match(regExLinks); // método para encontrar los match con la RegEx
 
   return linksFinder.map((link) => {
-    const obj = {
+    return {
       href: link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")")),
       text: link.slice(1, link.indexOf("]")),
       file: route,
     };
-    return obj;
   });
 }
 console.log(getLinks(route));
@@ -73,4 +72,5 @@ module.exports = {
   resolvePath,
   fileExtname,
   readFiles,
+  getLinks,
 };
