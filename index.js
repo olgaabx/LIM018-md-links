@@ -1,7 +1,6 @@
 const path = require('path'); // módulo path para trabajar con las rutas
 const fs = require('fs'); // módulo de fs (para trabajar con fylesistem)
-const axios = require('axios');
-const route = './README.md';
+const route = './test/pruebasmd/readme2.md'; // './README.md';
 
 // • Validamos si la ruta sí existe o no
 const routeValidator = (router) => {
@@ -56,12 +55,10 @@ const getLinks = (router) => {
   const regExLinks = /(\[(.*?)\])?\(http(.*?)\)/gm; // /\[(.*?)\]\(.*?\)/gm; // expresión regular para los links
   const readingFiles = readFiles(router); // función que ya lee los archivos
   const linksFinder = readingFiles.match(regExLinks); // método para encontrar los match con la RegEx
-  console.log(linksFinder)
 
-  return linksFinder.map((link) =>
-    link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")"))
-  );
-  // var mySubString = str.substring(str.indexOf("(") + 1, str.lastIndexOf(")"));
+  return linksFinder.map((link) => {
+    return link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")"))
+  });
 }
 console.log(getLinks(route));
 
