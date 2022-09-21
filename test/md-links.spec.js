@@ -44,7 +44,7 @@ describe("fileExtname", () => {
 describe("readFiles", () => {
   it("should read the content of the file", () => {
     const testPath = "./pruebasmd/readme1.md";
-    const testFile = "* Usando un _módulo_ como [markdown-it]";
+    const testFile = "* [Array.prototype.sort() - MDN]";
     expect(readFiles(testPath)).toContain(testFile);
   })
 });

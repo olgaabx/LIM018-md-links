@@ -57,7 +57,12 @@ const getLinks = (router) => {
   const linksFinder = readingFiles.match(regExLinks); // método para encontrar los match con la RegEx
 
   return linksFinder.map((link) => {
-    return link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")"))
+    const obj = {
+      href: link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")")),
+      text: link.slice(1, link.indexOf("]")),
+      file: route,
+    };
+    return obj;
   });
 }
 console.log(getLinks(route));
