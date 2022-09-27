@@ -5,10 +5,11 @@ const {
   fileExtname,
   readFiles,
   getLinks,
+  // validateLinkStatus,
 } = require("../index");
 
 const truePath = "C:/Users/Usuario/Git/Laboratoria/LIM018-md-links/README.md";
-const relativePath = "./pruebasmd/readme2.md";
+const relativePath = "./test/pruebasmd/readme2.md";
 
 describe("routeValidator", () => {
   it("should return true if the path exists", () => {
@@ -32,7 +33,7 @@ describe("isItAbsolute, ", () => {
 
 describe("resolvePath", () => {
   it("should return the path if its absolute", () => {
-    expect(resolvePath(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\pruebasmd\\readme2.md");
+    expect(resolvePath(relativePath)).toBe("C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\test\\pruebasmd\\readme2.md");
   });
 });
 
@@ -49,7 +50,6 @@ describe("fileExtname", () => {
 
 describe("readFiles", () => {
   it("should read the content of the file", () => {
-    // const testPath = "./pruebasmd/readme2.md";
     const testFile = "* [Array.prototype.sort() - MDN]";
     expect(readFiles(relativePath)).toContain(testFile);
   })
@@ -72,6 +72,11 @@ describe("getLinks", () => {
         file: "./test/pruebasmd/readme2.md",
         href: "https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
         text: "Array.prototype.sort() - MDN",
+      },
+      {
+        file: "./test/pruebasmd/readme2.md",
+        href: "https://developer.mozill/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort",
+        text: "Array.prototype.sort() - MALO",
       },
     ];
     expect(getLinks(relativePath)).toStrictEqual(arrayObjects);

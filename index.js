@@ -1,5 +1,7 @@
 const path = require('path'); // módulo path para trabajar con las rutas
 const fs = require('fs'); // módulo de fs (para trabajar con fylesistem)
+const axios = require('axios');
+const { resolve } = require('path');
 const route = './test/pruebasmd/readme2.md'; // './README.md';
 
 // • Validamos si la ruta sí existe o no
@@ -12,7 +14,7 @@ const routeValidator = (router) => {
   }
 };
 // routeValidator(route);
-console.log(routeValidator(route));
+//console.log(routeValidator(route));
 
 // • Saber si es absoluta
 const isItAbsolute = (router) => {
@@ -23,13 +25,13 @@ const isItAbsolute = (router) => {
   }
 };
 // isItAbsolute(route);
-console.log(isItAbsolute(route));
+//console.log(isItAbsolute(route));
 
 // • Convertir una ruta relativa en absoluta
 const resolvePath = (router) => {
   return path.resolve(router);
 }
-console.log(resolvePath(route));
+//console.log(resolvePath(route));
 
 // • Confirmando si el archivo tiene extesión .md
 const fileExtname = (router) => {
@@ -37,7 +39,7 @@ const fileExtname = (router) => {
   return extname === ".md" ? extname : false; // devuelve la extensión del archivo si es md
 };
 // fileExtname(route);
-console.log(fileExtname(route));
+//console.log(fileExtname(route));
 
 // • Leer el archivo
 const readFiles = (router) => {
@@ -60,11 +62,43 @@ const getLinks = (router) => {
     return {
       href: link.substring(link.indexOf("(http") + 1, link.lastIndexOf(")")),
       text: link.slice(1, link.indexOf("]")),
-      file: route,
+      file: router,
     };
   });
 }
-console.log(getLinks(route));
+//console.log(getLinks(route));
+
+// • Validar el estatus de los links
+const validateLinkStatus = (router) => {
+  const arrayLinks = getLinks(router);
+  return Promise.all(arrayLinks.map((obj) => {
+    return axios.get(obj.href)
+    .then((result) => {
+      // console.log(result)
+      return {
+        ...obj,
+        status: result.status,
+        ok: result.statusText,
+      };
+    })
+    .catch((error) => {
+      // console.log(error);
+      return {
+        ...obj,
+        status: error.errno,
+      };
+    })
+  }))
+}
+validateLinkStatus(route).then((result) => {
+  console.log(result);
+});
+// console.log(validateLinkStatus(getLinks(route))).then((response) => {
+//   console.log(response);
+// });
+// validateLinkStatus(getLinks(isItAbsolute(route))).then((result) => {
+//   console.log(result)
+// });
 
 module.exports = {
   routeValidator,
@@ -73,4 +107,5 @@ module.exports = {
   fileExtname,
   readFiles,
   getLinks,
+  // validateLinkStatus,
 };
