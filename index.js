@@ -56,7 +56,7 @@ const readFiles = (router) => {
 //console.log(readFiles(route));
 
 // • Obtener los links
-const getLinks = (router) => {
+const getLink = (router) => {
   const regExLinks = /(\[(.*?)\])?\(http(.*?)\)/gm; // /\[(.*?)\]\(.*?\)/gm; // expresión regular para los links
   const readingFiles = readFiles(router); // función que ya lee los archivos
   const linksFinder = readingFiles.match(regExLinks); // método para encontrar los match con la RegEx
@@ -73,7 +73,7 @@ const getLinks = (router) => {
 
 // • Validar el estatus de los links
 const validateLinkStatus = (router) => {
-  const arrayLinks = getLinks(router);
+  const arrayLinks = getLink(router);
   return Promise.all(arrayLinks.map((obj) => {
     return axios.get(obj.href)
     .then((result) => {
@@ -110,7 +110,7 @@ const statsLink = (arrayObjects) => {
     UniqueLinks: uniqueLinks.length,
   };
 }
-// console.log("soy la función de STATS =>", statsLink(getLinks(route)));
+// console.log("soy la función de STATS =>", statsLink(getLink(route)));
 
 
 // const links = [
@@ -131,7 +131,7 @@ const statsLink = (arrayObjects) => {
 // ];
 
 // Links rotos
-const brokenLinks = (arrayObjects) => {
+const brokenLink = (arrayObjects) => {
   //console.log(arrayObjects)
   const broken = arrayObjects.filter(
     (obj) => obj.ok === "error").length;
@@ -139,7 +139,7 @@ const brokenLinks = (arrayObjects) => {
     Broken: broken,
   }
 };
-// console.log(brokenLinks(links))
+// console.log(brokenLink(links))
 
 // Leer directorios
 // const dirRoute = "C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\dir";
@@ -160,9 +160,9 @@ module.exports = {
   resolvePath,
   fileExtname,
   readFiles,
-  getLinks,
+  getLink,
   validateLinkStatus,
   statsLink,
-  brokenLinks,
+  brokenLink,
   findFilesInDir,
 };
