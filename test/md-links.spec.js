@@ -4,7 +4,7 @@ const {
   resolvePath,
   fileExtname,
   readFiles,
-  getLinks,
+  getLink,
   // validateLinkStatus,
 } = require("../index");
 
@@ -55,7 +55,7 @@ describe("readFiles", () => {
   })
 });
 
-describe("getLinks", () => {
+describe("getLink", () => {
   it("should return an array of objects", () => {
     const arrayObjects = [
       {
@@ -79,6 +79,6 @@ describe("getLinks", () => {
         text: "Array.prototype.sort() - MALO",
       },
     ];
-    expect(getLinks(relativePath)).toStrictEqual(arrayObjects);
+    expect(getLink(relativePath)).toStrictEqual(arrayObjects);
   })
 });
