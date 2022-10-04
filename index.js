@@ -24,7 +24,6 @@ const isItAbsolute = (router) => {
     return false
   }
 };
-// isItAbsolute(route);
 //console.log(isItAbsolute(route));
 
 // • Convertir una ruta relativa en absoluta
@@ -33,12 +32,17 @@ const resolvePath = (router) => {
 }
 //console.log(resolvePath(route));
 
+// Validar si es un archivo
+const statFile = (router) => fs.statSync(router).isFile();
+
+// Validando si es un directorio
+// const isItADir = (router) => fs.statSync(router).isDirectory();
+
 // • Confirmando si el archivo tiene extesión .md
 const fileExtname = (router) => {
   const extname = path.extname(router);
   return extname === ".md" ? extname : false; // devuelve la extensión del archivo si es md
 };
-// fileExtname(route);
 //console.log(fileExtname(route));
 
 // • Leer el archivo
@@ -49,7 +53,6 @@ const readFiles = (router) => {
     return false;
   }
 }
-// readFiles(route);
 //console.log(readFiles(route));
 
 // • Obtener los links
@@ -86,19 +89,70 @@ const validateLinkStatus = (router) => {
       return {
         ...obj,
         status: error.errno,
+        ok: "error",
       };
     })
   }))
 }
-validateLinkStatus(route).then((result) => {
-  console.log(result);
-});
-// console.log(validateLinkStatus(getLinks(route))).then((response) => {
-//   console.log(response);
+// const err =
+// validateLinkStatus(route)
+//   .then((result) => {
+//     console.log(result)
+//   // return result
 // });
-// validateLinkStatus(getLinks(isItAbsolute(route))).then((result) => {
-//   console.log(result)
-// });
+
+// • STATS. Links únicos y totales
+const statsLink = (arrayObjects) => {
+  const totalLinks = arrayObjects.map(obj => obj.href);
+  const uniqueLinks = [...new Set(totalLinks)];
+  return {
+    TotalLinks: totalLinks.length,
+    UniqueLinks: uniqueLinks.length,
+  };
+}
+// console.log("soy la función de STATS =>", statsLink(getLinks(route)));
+
+
+// const links = [
+//   {
+//     href: 'https://curriculum.laboratoria.la/es/topics/javascript/04-arrays',
+//     text: '* [Arreglos]',
+//     file: './README.md',
+//     status: -3008,
+//     ok: "error",
+//   },
+//   {
+//     href: 'https://curriculum.laboratoria.la/es/topics/javascript/04-arrays',
+//     text: '* [Arreglos]',
+//     file: './README.md',
+//     status: -3008,
+//     ok: "200",
+//   },
+// ];
+
+// Links rotos
+const brokenLinks = (arrayObjects) => {
+  //console.log(arrayObjects)
+  const broken = arrayObjects.filter(
+    (obj) => obj.ok === "error").length;
+  return {
+    Broken: broken,
+  }
+};
+// console.log(brokenLinks(links))
+
+// Leer directorios
+// const dirRoute = "C:\\Users\\Usuario\\Git\\Laboratoria\\LIM018-md-links\\dir";
+const findFilesInDir = (dirPath) => {
+  if (statFile(dirPath)) {
+    return [dirPath];
+  }
+  const readDir = fs.readdirSync(dirPath); // leyendo el directorio
+  return readDir
+    .map((dirContent) => findFilesInDir(path.join(dirPath, dirContent)))
+    .flat();
+};
+// console.log(findFilesInDir(dirRoute));
 
 module.exports = {
   routeValidator,
@@ -107,5 +161,8 @@ module.exports = {
   fileExtname,
   readFiles,
   getLinks,
-  // validateLinkStatus,
+  validateLinkStatus,
+  statsLink,
+  brokenLinks,
+  findFilesInDir,
 };
