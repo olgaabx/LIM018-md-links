@@ -4,5 +4,3 @@
 * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 * [Array.prototype.sort() - MDN](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
 * [Array.prototype.sort() - MALO](https://developer.mozill/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-* [Array.prototype.sort() - MALO](https://developer.mozill/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)
-* [Array.prototype.sort() - MALO](https://developer.mozill/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort)

@@ -1,5 +1,2 @@
-* [Arreglos](https://google.com)
-* [Arreglos](https://google.com)
-* [Arreglos](https://google.com)
-* [Arreglos](https://google.com)
-* [Arreglos](https://google.xxx)
+* [Arreglos1](https://google.com)
+* [Arreglos1+](https://google.xxx)
