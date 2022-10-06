@@ -1,7 +1,7 @@
 const {
   routeValidator,
   isItAbsolute,
-  resolvePath,
+  // resolvePath,
   fileExtname,
   readFiles,
   getLink,
