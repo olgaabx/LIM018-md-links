@@ -16,7 +16,7 @@ const isItAbsolute = (router) => {
 };
 
 // • Convertir una ruta relativa en absoluta
-const resolvePath = (router) => path.isAbsolute(router) ? router : path.resolve(router); // (router) => path.resolve(router);
+const resolvePath = (router) => path.resolve(router);
 
 // Validar si es un archivo
 const statFile = (router) => fs.statSync(router).isFile();
